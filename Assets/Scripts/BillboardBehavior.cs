@@ -19,12 +19,12 @@ public class BillboardBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-    Vector3 newRotation = mainCamera.transform.eulerAngles;
-    newRotation.x = 0;
-    newRotation.z = 0;
-    transform.eulerAngles = newRotation;
-    transform.Rotate(0, 90, 0);
+    //Vector3 newRotation = mainCamera.transform.eulerAngles;
+    //newRotation.x = 0;
+    //newRotation.z = 0;
+    //transform.eulerAngles = newRotation;
+    //transform.Rotate(0, 90, 0);
     }
 }

@@ -16,9 +16,20 @@ public class FPSController : MonoBehaviour
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
+    
+    Vector3 previousPos;
+    public float velocity;
+    
+    
+    
     public bool canLook = false;
     [HideInInspector]
     public bool canMove = true;
+
+
+
+
+
     
     public LayerMask entityLayer;
     public LayerMask worldLayer;
@@ -26,7 +37,7 @@ public class FPSController : MonoBehaviour
     //starting here is new stuff
     public float maxSpeed;
 
-    public float frictionAmount;
+    public float frictionAmount = 90.0f;
 
     public int maxAmmo;
     public int currentAmmo;
@@ -79,7 +90,7 @@ public class FPSController : MonoBehaviour
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        moveDirection = Vector3.Normalize((forward * curSpeedX) + (right * curSpeedY)); //Normalizing this makes movement wierd, look up the documentation on the Move function
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
@@ -92,13 +103,13 @@ public class FPSController : MonoBehaviour
 
         if (canLook)
         {
-           // Cursor.lockState = CursorLockMode.Locked;
-           // Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else if (!canLook)
         {
-           // Cursor.lockState = CursorLockMode.None;
-           // Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
 
@@ -111,8 +122,15 @@ public class FPSController : MonoBehaviour
         }
 
         // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+        
 
+        velocity = ((transform.position - previousPos).magnitude) / Time.deltaTime;
+        previousPos = transform.position;
+
+        //print (velocity);
+
+        characterController.Move(((moveDirection * 10) )* Time.deltaTime);
+        
 
 
         //Debug.Log(Input.GetButton("Fire"));
