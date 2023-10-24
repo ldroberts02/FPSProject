@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIBehavior : MonoBehaviour
 {
     public GameObject playerObject;
+    public Animator uiAnimator;
     public GameObject sunObject;
     public Toggle sunOverride; //this is using the UI toggle atm
     public Slider horizontalSlider;
@@ -41,9 +42,9 @@ public class UIBehavior : MonoBehaviour
             verticalSliderGameObject.SetActive(true);
             sunObject.GetComponent<LightTimer>().rotateEnable = false;
             sunObject.GetComponent<LightTimer>().sunLight.transform.eulerAngles = new Vector3(
-                                                                                        verticalSlider.value,   
-                                                                                        sunObject.GetComponent<LightTimer>().sunLight.transform.eulerAngles.y,  
-                                                                                        sunObject.GetComponent<LightTimer>().sunLight.transform.eulerAngles.z);
+                                                                                                verticalSlider.value,   
+                                                                                                sunObject.GetComponent<LightTimer>().sunLight.transform.eulerAngles.y,  
+                                                                                                sunObject.GetComponent<LightTimer>().sunLight.transform.eulerAngles.z);
         }
         else if (!sunOverride.GetComponent<Toggle>().isOn) //when toggle is false
         {
@@ -52,11 +53,7 @@ public class UIBehavior : MonoBehaviour
             sunObject.GetComponent<LightTimer>().rotateSun(sunSpeed);
         }
 
-        //Debug.Log(sunSpeed);
-
-
-        
-
+        uiAnimator.SetFloat("PlayerSpeed", playerObject.GetComponent<FPSController>().velocity);
 
     }
 

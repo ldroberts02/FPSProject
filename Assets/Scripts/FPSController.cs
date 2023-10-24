@@ -7,7 +7,7 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
     public float walkingSpeed = 7.5f;
-    public float runningSpeed = 11.5f;
+    public float runningSpeed = 22.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public Camera playerCamera;
@@ -16,6 +16,8 @@ public class FPSController : MonoBehaviour
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
+
+    public Animator uiAnimator;
     
     Vector3 previousPos;
     public float velocity;
@@ -23,25 +25,22 @@ public class FPSController : MonoBehaviour
     
     
     public bool canLook = false;
+    public bool canLookVertical = false;
     [HideInInspector]
     public bool canMove = true;
 
+    public bool fireBool = false;
 
-
-
-
-    
     public LayerMask entityLayer;
     public LayerMask worldLayer;
 
     //starting here is new stuff
-    public float maxSpeed;
+    public float maxSpeed = 10.0f;
 
-    public float frictionAmount = 90.0f;
+    public float frictionAmount = 12.0f;
 
     public int maxAmmo;
     public int currentAmmo;
-
 
     void Start()
     {
@@ -67,6 +66,12 @@ public class FPSController : MonoBehaviour
         {
             Ray ray = playerCamera.ViewportPointToRay(new Vector3 (0.5f, 0.5f, 0));
             Debug.DrawRay(ray.origin, ray.direction * 10,Color.red,1);
+            
+            
+            //if(!fireBool && uiAnimator.GetFloat("FireFloat") == 1.0f){fireBool = true}
+            
+            if(!fireBool){fireBool = true;}
+           
             //RaycastHit hitData;
             //Physics.Raycast(ray, out hitData);
             //Debug.Log(hitData);
@@ -81,16 +86,19 @@ public class FPSController : MonoBehaviour
             }
         }
 
+        if(fireBool){uiAnimator.SetTrigger("Fire");fireBool = false;}
+        fireBool = false;
 
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : runningSpeed;
+        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : runningSpeed;
         float movementDirectionY = moveDirection.y;
-        moveDirection = Vector3.Normalize((forward * curSpeedX) + (right * curSpeedY)); //Normalizing this makes movement wierd, look up the documentation on the Move function
+        moveDirection = Vector3.ClampMagnitude((((forward * curSpeedX) + (right * curSpeedY)) / frictionAmount), (maxSpeed / 10));
+        
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
@@ -129,7 +137,7 @@ public class FPSController : MonoBehaviour
 
         //print (velocity);
 
-        characterController.Move(((moveDirection * 10) )* Time.deltaTime);
+        characterController.Move((moveDirection * maxSpeed)* Time.deltaTime);
         
 
 
@@ -138,17 +146,24 @@ public class FPSController : MonoBehaviour
         // Player and Camera rotation
         if (canMove && canLook)
         {
+            if (canLookVertical)
+            {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            }
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
         if (Input.GetButton("Camera Reset"))
         {
-            playerCamera.transform.localRotation = Quaternion.Euler(0,0,0);
+            playerCamera.transform.localRotation = Quaternion.Euler(0,-90,0);
         }
 
+        if(velocity > 1)
+        {
+            //set ui blending and stuff here
+        }
 
 
     }
