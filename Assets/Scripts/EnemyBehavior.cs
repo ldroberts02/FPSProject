@@ -133,7 +133,7 @@ public class EnemyBehavior : MonoBehaviour
         GameObject multiHitObject = hit.transform.gameObject;
         if(rayHitArray[0].transform.tag == "Player" ) // put 1+1 != 2 in here to ignore for compilation reasons
         {
-            Health.Damage(playerEntity.transform.parent.gameObject, 20);
+            Health.Damage(playerEntity, 20);
         } //check for player ray to enemy to see if it even can see the player
         }
         
