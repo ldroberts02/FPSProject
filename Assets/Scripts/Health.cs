@@ -42,7 +42,7 @@ public class Health : MonoBehaviour
                 target.GetComponent<Health>().healthNum = target.GetComponent<Health>().healthNum - DamageAmt;
             }
         }
-        if (target.name == "Player")
+        if (target.name == "Player" || target.name == "Player Capsule")
         {
             target.GetComponent<FPSController>().hurtBool = true;
         }
@@ -50,6 +50,7 @@ public class Health : MonoBehaviour
         {
             target.GetComponent<EnemyBehavior>().hurtBool = true;
         }
+        
     }
     void OnDeath()
     {

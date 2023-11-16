@@ -2421,8 +2421,9 @@ MonoBehaviour:
   verticalSliderGameObject: {fileID: 7360764169107388090}
   sunSpeed: 0
   sunRot: 0
-  showDebugOptions: 1
+  showDebugOptions: 0
   debugUI: {fileID: 7360764168791610819}
+  healthText: {fileID: 0}
 --- !u!1 &7360764169674383057
 GameObject:
   m_ObjectHideFlags: 0
