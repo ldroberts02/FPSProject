@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -18,6 +19,7 @@ public class FPSController : MonoBehaviour
     float rotationX = 0;
 
     public Animator uiAnimator;
+    public Animator overlayAnimator;
     
     Vector3 previousPos;
     public float velocity;
@@ -30,6 +32,8 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
 
     public bool fireBool = false;
+    public bool hurtBool = false;
+    public bool interactBool = false;
 
     public LayerMask entityLayer;
     public LayerMask worldLayer;
@@ -41,16 +45,24 @@ public class FPSController : MonoBehaviour
 
     public int maxAmmo;
     public int currentAmmo;
+    public Health Health;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         
+        //Cursor.visible = false;
     }
-
+    void Awake()
+    {
+        canLook = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
-        if(!canLook && Input.GetButton("Look"))
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        /*if(!canLook && Input.GetButton("Look"))
         {
             canLook = true;
             Cursor.lockState = CursorLockMode.Locked;
@@ -61,34 +73,49 @@ public class FPSController : MonoBehaviour
             canLook = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }*/
+        if (canLook)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
         }
-        if (Input.GetButton("Fire"))
+        if (Input.GetButtonDown("Fire"))
         {
             Ray ray = playerCamera.ViewportPointToRay(new Vector3 (0.5f, 0.5f, 0));
-            Debug.DrawRay(ray.origin, ray.direction * 10,Color.red,1);
-            
-            
-            //if(!fireBool && uiAnimator.GetFloat("FireFloat") == 1.0f){fireBool = true}
+            //Debug.DrawRay(ray.origin, ray.direction * 10,Color.red,1);
             
             if(!fireBool){fireBool = true;}
-           
-            //RaycastHit hitData;
-            //Physics.Raycast(ray, out hitData);
-            //Debug.Log(hitData);
-            //if(Physics.Raycast(ray, 100, worldLayer))
-            //{
-           //     //Debug.Log("Hit World Layer");
-           // }
 
-            if(Physics.Raycast(ray, 10, entityLayer))
+            RaycastHit hit;
+            //if(Physics.Raycast(ray, 10, entityLayer))
+            if(Physics.Raycast(ray, hitInfo: out hit, maxDistance: 50, layerMask: entityLayer))
             {
-                Debug.Log("Hit Entity Layer");   
+                //Debug.Log("Hit Entity");
+                //Debug.Log(hit.collider.gameObject.name);
+                //Destroy(hit.collider.gameObject.transform.parent.gameObject );
+
+                Health.Damage(hit.collider.gameObject.transform.parent.gameObject, 15);
+                //instanciate the blood particle here
+
             }
         }
 
-        if(fireBool){uiAnimator.SetTrigger("Fire");fireBool = false;}
+        if(fireBool)
+        {
+            uiAnimator.SetTrigger("Fire");
+            fireBool = false;
+        }
         fireBool = false;
-
+        if(hurtBool)
+        {
+            overlayAnimator.SetTrigger("OnHurt");
+            hurtBool = false;
+        }
+        if(interactBool)
+        {
+            overlayAnimator.SetTrigger("OnInteract");
+            interactBool = false;
+        }
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -157,7 +184,8 @@ public class FPSController : MonoBehaviour
 
         if (Input.GetButton("Camera Reset"))
         {
-            playerCamera.transform.localRotation = Quaternion.Euler(0,-90,0);
+            //playerCamera.transform.localRotation = Quaternion.Euler(0,-90,0);
+            SceneManager.LoadScene("Test Scene");
         }
 
         if(velocity > 1)

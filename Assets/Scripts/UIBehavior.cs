@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 
 public class UIBehavior : MonoBehaviour
@@ -17,6 +19,7 @@ public class UIBehavior : MonoBehaviour
     public float sunRot = 0.0f;
     public bool showDebugOptions;
     public GameObject debugUI;
+    public TMP_Text healthText;
     
     void Start()
     {
@@ -35,6 +38,7 @@ public class UIBehavior : MonoBehaviour
 
     void Update()
     {
+        if(sunObject != null){
         sunSpeed = horizontalSlider.value * 10;
 
         if (sunOverride.GetComponent<Toggle>().isOn) //when toggle is true
@@ -52,8 +56,10 @@ public class UIBehavior : MonoBehaviour
             sunObject.GetComponent<LightTimer>().rotateEnable = true;
             sunObject.GetComponent<LightTimer>().rotateSun(sunSpeed);
         }
-
+        }
         uiAnimator.SetFloat("PlayerSpeed", playerObject.GetComponent<FPSController>().velocity);
+
+        healthText.text = ("Health: " + (playerObject.GetComponent<Health>().healthNum / 9));
 
     }
 
