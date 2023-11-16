@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1427585024}
-  m_IndirectSpecularColor: {r: 0.15991654, g: 0.18498696, b: 0.20387378, a: 1}
+  m_IndirectSpecularColor: {r: 0.15991679, g: 0.18498734, b: 0.20387416, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,11 +142,11 @@ PrefabInstance:
         WASD/Arrow
         Keys - Move
 
-        R- Reset'
+        R- Main Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 2105131176964928489, guid: ebb1915d73514d8478bd75d006f703aa, type: 3}
       propertyPath: m_fontSize
-      value: 46.25
+      value: 40.45
       objectReference: {fileID: 0}
     - target: {fileID: 5168327458162277999, guid: ebb1915d73514d8478bd75d006f703aa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3715,6 +3715,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d31a4fcd73e1e4c8541b41dd273cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1045430548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3026052391875643045, guid: f8bffbad0ded6e843acec151f6e6e7f1, type: 3}
+  m_PrefabInstance: {fileID: 3281864396336074687}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045430543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b750e0d10aed1024cb5f2f4a902001ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1107008660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8721253548311338133, guid: d33e71cbcdc8f774aa07aa552a719807, type: 3}
@@ -4398,7 +4409,7 @@ GameObject:
   - component: {fileID: 1591163059}
   - component: {fileID: 1591163058}
   m_Layer: 0
-  m_Name: Health (1)
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5142,9 +5153,9 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3281864397110972078, guid: f8bffbad0ded6e843acec151f6e6e7f1, type: 3}
-      propertyPath: canLook
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 1045430548}
     - target: {fileID: 3281864397110972078, guid: f8bffbad0ded6e843acec151f6e6e7f1, type: 3}
       propertyPath: gravity
       value: 5

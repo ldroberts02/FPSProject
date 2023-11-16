@@ -26,7 +26,7 @@ public class FPSController : MonoBehaviour
     
     
     
-    public bool canLook = false;
+    public bool canLook = true;
     public bool canLookVertical = false;
     [HideInInspector]
     public bool canMove = true;
@@ -51,15 +51,19 @@ public class FPSController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         
-        //Cursor.visible = false;
+        
     }
     void Awake()
     {
-        canLook = true;
+        //canLook = true;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     void Update()
     {
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
         /*if(!canLook && Input.GetButton("Look"))
@@ -77,7 +81,7 @@ public class FPSController : MonoBehaviour
         if (canLook)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = false;
+            Cursor.visible = false;
         }
         if (Input.GetButtonDown("Fire"))
         {
@@ -185,7 +189,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetButton("Camera Reset"))
         {
             //playerCamera.transform.localRotation = Quaternion.Euler(0,-90,0);
-            SceneManager.LoadScene("Test Scene");
+            SceneManager.LoadScene("Main Menu");
         }
 
         if(velocity > 1)

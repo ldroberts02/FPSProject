@@ -26,12 +26,12 @@ public class UIBehavior : MonoBehaviour
         if (!showDebugOptions)
         {
             debugUI.SetActive(false);
-            playerObject.GetComponent<FPSController>().canLook = true;
+            //playerObject.GetComponent<FPSController>().canLook = true;
         }
         else if (showDebugOptions)
         {
             debugUI.SetActive(true);
-            playerObject.GetComponent<FPSController>().canLook = false;
+            //playerObject.GetComponent<FPSController>().canLook = false;
         }
     }
 
