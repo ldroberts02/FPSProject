@@ -41,10 +41,18 @@ public class Health : MonoBehaviour
             {
                 target.GetComponent<Health>().healthNum = target.GetComponent<Health>().healthNum - DamageAmt;
             }
+            if (target.transform.parent.GetComponent<Health>() != null)
+            {
+                target.transform.parent.GetComponent<Health>().healthNum = target.transform.parent.GetComponent<Health>().healthNum - DamageAmt;
+            }
         }
-        if (target.name == "Player" || target.name == "Player Capsule")
+        if (target.name == "Player")
         {
-            //target.GetComponent<FPSController>().hurtBool = true; //error here?
+            target.GetComponent<FPSController>().hurtBool = true; //error here?
+        }
+        if(target.name == "Player Capsule")
+        {
+            target.transform.parent.GetComponent<FPSController>().hurtBool = true;
         }
         if (target.tag == "Enemy")
         {
@@ -61,7 +69,7 @@ public class Health : MonoBehaviour
         }
         else if (this.name == "Player")
         {
-            SceneManager.LoadSceneAsync("Test Scene");
+            SceneManager.LoadSceneAsync("Game Scene");
             //PlayerDeath.OnDeath();
         }
     }

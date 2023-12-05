@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour
     public bool pauseBool = false;
     public int playerHealth;
     public GameObject playerObject;
+    public GameObject pauseCanvas;
     private void Awake()
     {
         if (Instance == null)
@@ -41,23 +42,26 @@ public class GameState : MonoBehaviour
         }
         if (Input.GetKeyUp("p") && Time.timeScale == 0)
         {
-            pauseBool = false;
-            ResumeGame();
+            //pauseBool = false;
+            //ResumeGame();
         }
     }
-    void PauseGame ()
+    public void PauseGame ()
     {
         playerObject.GetComponent<FPSController>().canLook = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        pauseCanvas.SetActive(true);
         Time.timeScale = 0;
-        Debug.Log("Paused");
+        //Debug.Log("Paused");
     }
-    void ResumeGame ()
+    public void ResumeGame ()
     {
         playerObject.GetComponent<FPSController>().canLook = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1;
     }
+    
 }
