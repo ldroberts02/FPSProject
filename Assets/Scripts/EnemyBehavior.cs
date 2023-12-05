@@ -37,99 +37,99 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
 
     {
-        if (playerEntity != null)
+        if (1 + 1 == 2)
         {
-            Vector3 playerPosition = playerEntity.transform.position;
-            Vector3 vectorToPlayer = playerPosition - transform.position;
-            myLight.color = Color.white;
-            if (alert)
+            if (playerEntity != null)
             {
-                myLight.color = Color.red;
-                if (Vector3.Distance(targetPosition.position, this.transform.position) <= 5.0f | !Moving)
+                Vector3 playerPosition = playerEntity.transform.position;
+                Vector3 vectorToPlayer = playerPosition - transform.position;
+                myLight.color = Color.white;
+                if (alert)
                 {
-                    agent.isStopped = true;
-                    enemyAnimator.SetBool("isMoving", false);
-                }
-                else if (Vector3.Distance(targetPosition.position, this.transform.position) >= 5.0f && Moving)
-                {
-                    agent.destination = playerEntity.transform.position;
-                    agent.isStopped = false;
-                    enemyAnimator.SetBool("isMoving", true);
-                    walkInt ++;
-                }
-
-            }
-            else if (!alert)
-            {
-                if (Vector3.Distance(transform.position, playerPosition) <= visionRange)
-                {
-                    if (Mathf.Abs(Vector3.Angle(transform.forward, vectorToPlayer)) <= visionConeAngle)
+                    myLight.color = Color.red;
+                    if (Vector3.Distance(targetPosition.position, this.transform.position) <= 5.0f | !Moving)
                     {
-                        rayHitArray = Physics.RaycastAll(transform.position + new Vector3(0, 1, 0), Vector3.Normalize(playerEntity.transform.position - transform.position)); //add 1 to y to shoot ray from midddle of enemy
-                        RaycastHit hit = rayHitArray[0]; //get first raycast hit from multihit
-                        GameObject multiHitObject = hit.transform.gameObject;
-
-                        if (hit.transform.tag == "Player") // still bugged, fix the issue where it always reports player first, so it alerts enemys thru walls
+                        agent.isStopped = true;
+                        enemyAnimator.SetBool("isMoving", false);
+                    }
+                    else if (Vector3.Distance(targetPosition.position, this.transform.position) >= 5.0f && Moving)
+                    {
+                        agent.destination = playerEntity.transform.position;
+                        agent.isStopped = false;
+                        enemyAnimator.SetBool("isMoving", true);
+                        walkInt++;
+                    }
+                }
+                else if (!alert)
+                {
+                    if (Vector3.Distance(transform.position, playerPosition) <= visionRange)
+                    {
+                        if (Mathf.Abs(Vector3.Angle(transform.forward, vectorToPlayer)) <= visionConeAngle)
                         {
-                            Debug.DrawRay(transform.position + new Vector3(0, 1, 0), hit.transform.position - transform.position, Color.green, 1);
-                            string testText = "";
-                            for (int index = 0; index < rayHitArray.Length; index++) { testText += " , " + rayHitArray[index].transform.gameObject.name; }
-                            alert = true;
+                            rayHitArray = Physics.RaycastAll(transform.position + new Vector3(0, 1, 0), Vector3.Normalize(playerEntity.transform.position - transform.position)); //add 1 to y to shoot ray from midddle of enemy
+                            RaycastHit hit = rayHitArray[0]; //get first raycast hit from multihit
+                            GameObject multiHitObject = hit.transform.gameObject;
 
+                            if (hit.transform.tag == "Player") // still bugged, fix the issue where it always reports player first, so it alerts enemys thru walls
+                            {
+                                Debug.DrawRay(transform.position + new Vector3(0, 1, 0), hit.transform.position - transform.position, Color.green, 1);
+                                string testText = "";
+                                for (int index = 0; index < rayHitArray.Length; index++) { testText += " , " + rayHitArray[index].transform.gameObject.name; }
+                                alert = true;
+
+                            }
+                            else if (hit.transform.tag != "Player" || !alert)
+                            {
+                                alert = false;
+                            }
                         }
-                        
-                        else if (hit.transform.tag != "Player" || !alert)
+                        else
                         {
                             alert = false;
                         }
                     }
-                    else
-                    {
-                        alert = false;
-                    }
                 }
             }
-
-        }
-        if (enemyFire)
-        {
-            fireEvent();
-        }
-        if (walkInt == 300)
-        {
-            enemyAnimator.SetTrigger("Shoot");
-            walkInt = 0;
-        }
-        if(hurtBool)
-        {
-            enemyAnimator.SetTrigger("OnHurt");
-            hurtBool = false;
-        }
-        if(dead)
-        {
-            enemyAnimator.SetTrigger("OnDeath");
-            agent.isStopped = true;
-            
-            deadint ++;
-            if(deadint == 2000)
+            if (enemyFire)
             {
-                Destroy(this.gameObject);
+                fireEvent();
+            }
+            if (walkInt == 300)
+            {
+                enemyAnimator.SetTrigger("Shoot");
+                walkInt = 0;
+            }
+            if (hurtBool)
+            {
+                enemyAnimator.SetTrigger("OnHurt");
+                hurtBool = false;
+            }
+            if (dead)
+            {
+                enemyAnimator.SetTrigger("OnDeath");
+                agent.isStopped = true;
+                deadint++;
+                if (deadint == 2000)
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
     public void fireEvent()
     {
-        if(!dead){// damage here
-        enemyFire = false;
-        rayHitArray = Physics.RaycastAll(transform.position + new Vector3(0, 1, 0), Vector3.Normalize(playerEntity.transform.position - transform.position)); //add 1 to y to shoot ray from midddle of enemy
-        RaycastHit hit = rayHitArray[0]; //get first raycast hit from multihit
-        GameObject multiHitObject = hit.transform.gameObject;
-            Debug.Log(multiHitObject);
-        if(rayHitArray[0].transform.tag == "Player" )
-        {
-            Health.Damage(playerEntity, 20);
-        } //check for player ray to enemy to see if it even can see the player
+        if (!dead)
+        {// damage here
+            enemyFire = false;
+            rayHitArray = Physics.RaycastAll(transform.position + new Vector3(0, 1, 0), Vector3.Normalize(playerEntity.transform.position - transform.position)); //add 1 to y to shoot ray from midddle of enemy
+            RaycastHit hit = rayHitArray[0]; //get first raycast hit from multihit
+            GameObject multiHitObject = hit.transform.gameObject;
+            //Debug.Log(multiHitObject);
+            if (rayHitArray[0].transform.tag == "Player")
+            {
+                Health.Damage(playerEntity, 20); //error here
+            } //check for player ray to enemy to see if it even can see the player
         }
-        
+
     }
 }

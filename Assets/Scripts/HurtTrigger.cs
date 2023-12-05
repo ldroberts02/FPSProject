@@ -30,7 +30,7 @@ public class HurtTrigger : MonoBehaviour
                 Health.Damage(playerEntity, 5);
             }
         }
-        if(this.name == "Health")
+        if(this.name == "Health") //if its a health capsule
         {
             if (collision.gameObject.name == "Player")
             {

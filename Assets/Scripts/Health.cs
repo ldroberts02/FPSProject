@@ -44,7 +44,7 @@ public class Health : MonoBehaviour
         }
         if (target.name == "Player" || target.name == "Player Capsule")
         {
-            target.GetComponent<FPSController>().hurtBool = true;
+            //target.GetComponent<FPSController>().hurtBool = true; //error here?
         }
         if (target.tag == "Enemy")
         {
@@ -62,6 +62,7 @@ public class Health : MonoBehaviour
         else if (this.name == "Player")
         {
             SceneManager.LoadSceneAsync("Test Scene");
+            //PlayerDeath.OnDeath();
         }
     }
 }

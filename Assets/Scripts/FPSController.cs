@@ -50,8 +50,6 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        
-        
     }
     void Awake()
     {
