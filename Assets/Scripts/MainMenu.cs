@@ -12,6 +12,6 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
-        GameManagement.Instance.ChangeScene("Game Scene");
+        GameManager.Instance.ChangeScene("Game Scene");
     }
 }

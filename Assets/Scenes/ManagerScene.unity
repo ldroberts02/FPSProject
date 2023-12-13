@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131403168}
   - component: {fileID: 1131403169}
+  - component: {fileID: 1131403170}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -168,6 +169,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstScene: Main Menu
+--- !u!114 &1131403170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131403167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d7fb2c84c715045b6974aa143a7511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

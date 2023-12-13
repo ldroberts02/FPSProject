@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManagement : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static GameManagement Instance { get; private set; } = null;
+    public static GameManager Instance { get; private set; } = null;
     public string firstScene = "Main Menu";
     private void Awake()
     {
