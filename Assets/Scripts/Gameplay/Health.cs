@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
             if (target.GetComponent<Health>() != null)
             {
                 target.GetComponent<Health>().healthNum = target.GetComponent<Health>().healthNum + Mathf.Abs(HealAmt); // absolute value of healamount so you can't use this function as a health remover
+                SoundManager.Instance.PlaySound(5);
             }
         }
         if (target.name == "Player")
@@ -49,14 +50,18 @@ public class Health : MonoBehaviour
         if (target.name == "Player")
         {
             target.GetComponent<FPSController>().hurtBool = true; //error here?
+            SoundManager.Instance.PlaySound(3);
         }
         if(target.name == "Player Capsule")
         {
             target.transform.parent.GetComponent<FPSController>().hurtBool = true;
+            SoundManager.Instance.PlaySound(3);
         }
         if (target.tag == "Enemy")
         {
             target.GetComponent<EnemyBehavior>().hurtBool = true;
+
+            SoundManager.Instance.PlaySound(4);
         }
         
     }
@@ -65,6 +70,7 @@ public class Health : MonoBehaviour
         if(this.tag == "Enemy")
         {
             this.GetComponent<EnemyBehavior>().dead = true;
+            SoundManager.Instance.PlaySound(1);
             Destroy(this.gameObject);
         }
         else if (this.name == "Player")

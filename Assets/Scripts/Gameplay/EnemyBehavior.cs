@@ -70,12 +70,13 @@ public class EnemyBehavior : MonoBehaviour
                             RaycastHit hit = rayHitArray[0]; //get first raycast hit from multihit
                             GameObject multiHitObject = hit.transform.gameObject;
 
-                            if (hit.transform.tag == "Player") // still bugged, fix the issue where it always reports player first, so it alerts enemys thru walls
+                            if (hit.transform.tag == "Player" && !alert) // still bugged, fix the issue where it always reports player first, so it alerts enemys thru walls
                             {
                                 Debug.DrawRay(transform.position + new Vector3(0, 1, 0), hit.transform.position - transform.position, Color.green, 1);
                                 string testText = "";
                                 for (int index = 0; index < rayHitArray.Length; index++) { testText += " , " + rayHitArray[index].transform.gameObject.name; }
                                 alert = true;
+                                SoundManager.Instance.PlaySound(2);
 
                             }
                             else if (hit.transform.tag != "Player" || !alert)

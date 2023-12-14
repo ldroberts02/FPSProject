@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SoundTable
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 34e8ab30c6d34144fb8eceb1ca84bedd, type: 3}
+  - {fileID: 8300000, guid: 306f21436a99313459ec2467d113361d, type: 3}
+  - {fileID: 8300000, guid: 09e595db77da7224bbb9d3b63e0c6c79, type: 3}
+  - {fileID: 8300000, guid: ae26c19ef82fa0447a687bef4223a289, type: 3}
+  - {fileID: 8300000, guid: 15e4aafd00f337643910c619efe3068d, type: 3}
+  - {fileID: 8300000, guid: c9e9b76aa92d8044ea41e9d9df4971c6, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

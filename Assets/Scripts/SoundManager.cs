@@ -5,8 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; } = null;
-    AudioSource SoundSource;
-    AudioSource MusicSource;
+    public AudioSource SoundSource;
+    public AudioSource MusicSource;
+    public SoundTable soundList;
     void Start()
     {
         if (Instance == null)
@@ -28,9 +29,9 @@ public class SoundManager : MonoBehaviour
         MusicSource.clip = _musicClip;
         MusicSource.Play();
     }
-    public void PlaySound(AudioClip _soundClip)
+    public void PlaySound(int soundListInt)
     {
-        SoundSource.PlayOneShot(_soundClip, 1f);
+        SoundSource.PlayOneShot(soundList.sounds[soundListInt], 1f);
     }
     public void StopMusic()
     {

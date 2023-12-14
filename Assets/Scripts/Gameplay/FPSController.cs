@@ -82,11 +82,12 @@ public class FPSController : MonoBehaviour
             Cursor.visible = false;
         }
         if (Input.GetButtonDown("Fire"))
-        {
+        { 
+            
             Ray ray = playerCamera.ViewportPointToRay(new Vector3 (0.5f, 0.5f, 0));
             //Debug.DrawRay(ray.origin, ray.direction * 10,Color.red,1);
             
-            if(!fireBool){fireBool = true;}
+            if(!fireBool){SoundManager.Instance.PlaySound(0);fireBool = true;}
 
             RaycastHit hit;
             //if(Physics.Raycast(ray, 10, entityLayer))
