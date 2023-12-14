@@ -7,21 +7,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: round
+  m_Name: snow 3
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: 334645e2ec98e9b468c074829176a942, type: 2}
-  m_ModifiedSerializedProperties: 16
-  m_ValidKeywords:
-  - _ALPHATEST_ON
-  - _GLOSSYREFLECTIONS_OFF
-  - _SPECULARHIGHLIGHTS_OFF
+  m_Parent: {fileID: 2100000, guid: 63f96315ea435be41bc894220afe0fe0, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -29,18 +25,13 @@ Material:
     m_TexEnvs:
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.01, y: 0.03}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8a8051987630a9f42b7200317062874a, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: e1feeecb37188f24188c4442482056db, type: 3}
+        m_Scale: {x: 0.01, y: 0.03}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _Cutoff: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _Mode: 1
-    - _SpecularHighlights: 0
+    m_Floats: []
     m_Colors: []
   m_BuildTextureStacks: []
